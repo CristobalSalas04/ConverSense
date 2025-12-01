@@ -79,7 +79,7 @@ docker compose --profile gpu-nvidia up -d
 docker compose --profile cpu up -d
 ```
 
-### ▶️ Levantar el Dashboard (Nginx)
+### Levantar el Dashboard (Nginx)
 
 Dentro de la carpeta `shared` existe un segundo `docker-compose.yml` usado para el Dashboard.  
 Para ejecutarlo, usa los siguientes comandos:
