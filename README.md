@@ -58,8 +58,8 @@ ConverSense/
 
 1. **Clonar el repositorio:**
 ```bash
-git clone https://github.com/n8n-io/self-hosted-ai-starter-kit.git
-cd self-hosted-ai-starter-kit
+git clone https://github.com/CristobalSalas04/ConverSense.git
+cd ConverSense
 ```
 
 2. **Configurar variables de entorno:**
