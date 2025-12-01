@@ -200,14 +200,14 @@ POSTGRES_PASSWORD=tu_contraseña
 N8N_ENCRYPTION_KEY=clave_segura
 OLLAMA_HOST=ollama:11434
 ```
-### Base de Datos de Ejemplo
+## Base de Datos de Ejemplo
 
 ConverSense incluye una base de datos de ejemplo basada en el sector automotriz.  
 Esta base de datos se utiliza únicamente con fines demostrativos para mostrar el funcionamiento del sistema, sus flujos automatizados y las capacidades de integración con la inteligencia artificial.  
 
 El proyecto **no está limitado** al rubro automotriz: la estructura del sistema permite reemplazar fácilmente la base de datos por información de cualquier otro sector o empresa según las necesidades del usuario.
 
-# Backup y Restauración de la Base de Datos
+### Backup y Restauración de la Base de Datos
 
 Este proyecto incluye una base de datos PostgreSQL con datos de ejemplo del rubro automotriz.  
 Si deseas exportar o restaurar la base de datos completa, sigue estas instrucciones.
@@ -222,7 +222,7 @@ cat backups/automovilistica_backup.sql | docker exec -i self-hosted-ai-starter-k
 root puede ser cambiado por el usuario que indicaste al crear tus variables de entorno. Lo mas probable es que tengas que mover 
 
 
-# Restaurar Flujos y Credenciales de n8n
+### Restaurar Flujos y Credenciales de n8n
 
 Este proyecto incluye flujos y credenciales de n8n dentro de la carpeta:
 
