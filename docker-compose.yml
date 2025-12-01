@@ -1,6 +1,6 @@
 volumes:
   n8n_storage:
-  postgres_storage:
+  postgres_test:
   ollama_storage:
   qdrant_storage:
 
@@ -19,6 +19,10 @@ x-n8n: &service-n8n
     - N8N_PERSONALIZATION_ENABLED=false
     - N8N_ENCRYPTION_KEY
     - N8N_USER_MANAGEMENT_JWT_SECRET
+    - N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true
+    - N8N_EDITOR_BASE_URL=https://antichloristic-unarchitected-kandis.ngrok-free.app
+    - WEBHOOK_URL=https://antichloristic-unarchitected-kandis.ngrok-free.app
+    - N8N_DEFAULT_BINARY_DATA_MODE=filesystem
     - OLLAMA_HOST=${OLLAMA_HOST:-ollama:11434}
   env_file:
     - path: .env
@@ -57,8 +61,10 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_DB
+    ports:
+      - "5432:5432"
     volumes:
-      - postgres_storage:/var/lib/postgresql/data
+      - postgres_test:/var/lib/postgresql/data
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -h localhost -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
       interval: 5s
