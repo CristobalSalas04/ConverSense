@@ -207,6 +207,76 @@ Esta base de datos se utiliza únicamente con fines demostrativos para mostrar e
 
 El proyecto **no está limitado** al rubro automotriz: la estructura del sistema permite reemplazar fácilmente la base de datos por información de cualquier otro sector o empresa según las necesidades del usuario.
 
+# Backup y Restauración de la Base de Datos
+
+Este proyecto incluye una base de datos PostgreSQL con datos de ejemplo del rubro automotriz.  
+Si deseas exportar o restaurar la base de datos completa, sigue estas instrucciones.
+
+```bash
+# Opción 1: Usando Get-Content
+Get-Content backups/automovilistica_backup.sql | docker exec -i self-hosted-ai-starter-kit-postgres-1 psql -U root -d automovilistica
+
+# Opción 2: Usando el alias cat 
+cat backups/automovilistica_backup.sql | docker exec -i self-hosted-ai-starter-kit-postgres-1 psql -U root -d automovilistica
+```
+root puede ser cambiado por el usuario que indicaste al crear tus variables de entorno. Lo mas probable es que tengas que mover 
+
+
+# Restaurar Flujos y Credenciales de n8n
+
+Este proyecto incluye flujos y credenciales de n8n dentro de la carpeta:
+
+```
+./n8n/demo-data/
+```
+
+El sistema está configurado para **importar automáticamente** estos archivos al iniciar los contenedores gracias al servicio `n8n-import` definido en el `docker-compose.yml`.
+
+---
+
+## Sistema de Importación Automática
+
+### Arquitectura del Proceso
+Cuando ejecutas `docker compose up`, se activan dos servicios secuenciales:
+
+1. **n8n-import** (servicio de una sola ejecución)
+   - Ejecuta: `n8n import:credentials --separate --input=/demo-data/credentials`
+   - Ejecuta: `n8n import:workflow --separate --input=/demo-data/workflows`
+   - Monta la carpeta `./n8n/demo-data/` en `/demo-data/`
+
+2. **n8n** (servicio principal)
+   - Solo inicia después que `n8n-import` termine exitosamente
+   - Usa la configuración ya importada
+
+### Estructura Requerida
+
+./n8n/demo-data/
+├── credentials/
+│   ├── openAiApi.json     # Credenciales de OpenAI
+│   ├── postgres.json      # Credenciales de PostgreSQL
+│   └── ... otros .json
+└── workflows/
+    ├── workflow1.json     # Flujos de trabajo
+    ├── workflow2.json
+    └── ... otros .json
+
+### Importación manual de flujos en n8n
+
+Si por alguna razón el contenedor `n8n-import` no logra importar el flujo de ConverSense automáticamente, puedes realizar la importación manual directamente desde la interfaz de n8n.
+
+Sigue estos pasos:
+
+1. Ingresa al **Editor UI de n8n** en tu navegador (por defecto: `http://localhost:5678`).
+2. Crea un **nuevo flujo**.
+3. En la esquina superior derecha, haz clic en los **tres puntos del menú**.
+4. Selecciona **“Import from File”**.
+5. Busca y elige el archivo `conversense.json` ubicado en:
+
+./n8n/demo-data/workflows/conversense.json
+
+
+Una vez importado, podrás editarlo, ejecutarlo o ajustarlo según lo necesites.
+
 ## Solución de Problemas
 
 ### Problemas Comunes
