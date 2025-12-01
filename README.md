@@ -249,7 +249,7 @@ Cuando ejecutas `docker compose up`, se activan dos servicios secuenciales:
    - Usa la configuración ya importada
 
 ### Estructura Requerida
-
+```
 ./n8n/demo-data/
 ├── credentials/
 │   ├── openAiApi.json     # Credenciales de OpenAI
@@ -259,7 +259,7 @@ Cuando ejecutas `docker compose up`, se activan dos servicios secuenciales:
     ├── workflow1.json     # Flujos de trabajo
     ├── workflow2.json
     └── ... otros .json
-
+```
 ### Importación manual de flujos en n8n
 
 Si por alguna razón el contenedor `n8n-import` no logra importar el flujo de ConverSense automáticamente, puedes realizar la importación manual directamente desde la interfaz de n8n.
@@ -271,10 +271,9 @@ Sigue estos pasos:
 3. En la esquina superior derecha, haz clic en los **tres puntos del menú**.
 4. Selecciona **“Import from File”**.
 5. Busca y elige el archivo `conversense.json` ubicado en:
-
+```
 ./n8n/demo-data/workflows/conversense.json
-
-
+```
 Una vez importado, podrás editarlo, ejecutarlo o ajustarlo según lo necesites.
 
 ## Solución de Problemas
